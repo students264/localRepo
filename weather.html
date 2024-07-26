@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>wheather App</title>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+            display:flex;
+            justify-content:center;
+            align-items: center;
+            background-color:rgb(111, 206, 247);
+            background-image: url("weather.jpg.jpg");
+            background-size:cover;
+        }
+        .box{
+            width:600px;
+            height:700px;
+            color:white;
+            background-color: rgba(30, 30, 194,0.7);
+            border:1px solid black;
+            text-align:center;
+            font-size:30px;
+            margin:10px 10px 10px 10px;
+            position:relative;
+            top:20px;
+            border-radius:20px;
+        }
+        .search{
+            height:40px;
+            width:300px;
+            border:3px solid white;
+            margin-bottom:20px;
+            border-radius:30px;
+            cursor:alias;
+        }
+        .icon{
+            height:50px;
+            width:50px;
+            border:1px solid black;
+            border-radius:50%;
+            position: relative;
+            top:10px;
+            cursor:pointer;
+        }
+        .wspeed{
+            height:200px;
+            width:600px;
+            display:flex;
+            justify-content:space-evenly;
+            align-items:center;
+        }
+        .wind{
+            position:relative;
+            left:50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        search current weather
+        <div class="searchbox">
+            <input type="search"class="search"placeholder="Enter city name">
+            <button class="icon"><img src="search.jpg.png"height=30 width=30></button>
+        </div>
+        <div class="details">
+            <img src="wheather.jpg.png" height=200 width=200 id="imgicon">
+            <br>
+                <p id="des"style="color:white">cloudy</p>
+                <p  id="name";style="color:white;font-size:30px">delhi</p>
+                <p id="temp"style="color:white;">35<sup>0</sup>c</p>
+        </div>
+        <div class="wspeed">
+            <div>
+                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/wind-2184284-1828659.png?f=webp" height=50 width=80>
+                <p id="speed"style="color:white;">5km/h</p>
+            </div>
+            <div>
+               humidity:<p id="hu">10%</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let apikey="b8e1e52e15c108a39c151bd82e15c1e6";
+        let apiurl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        let btn=document.querySelector(".icon");
+        let place=document.querySelector(".search");
+        let image=document.getElementById("imgicon");
+        async function information(city){
+            let response=await fetch(apiurl+ city+ `&appid=${apikey}`);
+            var data=await response.json();
+            console.log(data);
+            document.querySelector("#name").innerText=data.name;
+            document.querySelector("#temp").innerText=Math.trunc(data.main.temp)+"°C";
+            document.querySelector("#hu").innerText=data.main.humidity+"%";
+            document.querySelector("#speed").innerText=data.wind.speed+"km/h";
+            document.querySelector("#des").innerText=data.weather[0].description;
+            if(data.weather[0].main =="Clouds" && data.weather[0].icon=="04d"){
+                image.src="cloud.jpg.png";
+            }
+            else if(data.weather[0].main =="Clouds" && data.weather[0].icon=="04n"){
+                image.src="cloud.jpg.png";
+            }
+            else if(data.weather[0].main =="Clouds" && data.weather[0].icon=="02d"){
+                image.src="vcloud.jpg.png";
+            }
+            else if(data.weather[0].main =="Clouds" && data.weather[0].icon=="02n"){
+                image.src="cmoon.jpg.png";
+            }
+            else if(data.weather[0].main =="Clouds" && data.weather[0].icon=="03d"){
+                image.src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Weather-few-clouds.svg/1200px-Weather-few-clouds.svg.png";
+            }
+            else if(data.weather[0].main =="Clouds" && data.weather[0].icon=="03n"){
+                image.src="scmoon.jpg.png";
+            }
+            else if(data.weather[0].main =="Clear" && data.weather[0].icon=="01d"){
+                image.src="https://icon-library.com/images/weather-icon-sunny/weather-icon-sunny-15.jpg";
+            }
+            else if(data.weather[0].main =="Clear" && data.weather[0].icon=="01n"){
+                image.src="https://static.vecteezy.com/system/resources/previews/012/629/871/original/clear-night-3d-weather-icon-illustration-png.png";
+            }
+            else if(data.weather[0].main =="Rain" && data.weather[0].icon=="09d"){
+                image.src="hrain.jpg.png";
+            }
+            else if(data.weather[0].main =="Rain" && data.weather[0].icon=="09n"){
+                image.src="hrain.jpg.png";
+            }
+            else if(data.weather[0].main =="Rain" && data.weather[0].icon=="10d"){
+                image.src="https://cdn-icons-png.flaticon.com/256/3905/3905284.png";
+            }
+            else if(data.weather[0].main =="Rain" && data.weather[0].icon=="10n"){
+                image.src="https://cdn-icons-png.flaticon.com/512/5370/5370459.png";
+            }
+            else if(data.weather[0].main =="Thunderstorm" && data.weather[0].icon=="11d"){
+                image.src="https://cdn-icons-png.flaticon.com/512/1959/1959334.png";
+            }
+            else if(data.weather[0].main =="Thunderstorm" && data.weather[0].icon=="11n"){
+                image.src="https://cdn-icons-png.flaticon.com/512/1959/1959334.png";
+            }
+            else if( data.weather[0].icon=="50d"){
+                image.src="https://cdn.icon-icons.com/icons2/3252/PNG/512/weather_haze_regular_icon_204113.png";
+            }
+            else if(data.weather[0].icon =="50n"){
+                image.src="https://cdn4.iconfinder.com/data/icons/weather-conditions/512/moon_night_fog-512.png";
+            }
+            else if(data.weather[0].main=="Drizzle"&& data.weather[0].main=="09d"){
+                image.src="https://cdn3d.iconscout.com/3d/premium/thumb/sunny-drizzling-9237578-7578163.png?f=webp";
+            }
+            else if(data.weather[0].main=="Drizzle"&& data.weather[0].main=="09n"){
+                image.src="https://icons.iconarchive.com/icons/custom-icon-design/lovely-weather-2/512/Lightshowers-night-icon.png";
+            }
+            else{
+                alert("not found");
+            }
+        }
+           btn.addEventListener("click",()=>{
+            information(place.value);
+           })
+        
+    </script>
+</body>

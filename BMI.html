@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI calculator</title>
+    <link rel="stylesheet"href="BMI.css">
+</head>
+<body>
+    <div class="contain">
+    <div class="field">
+     <form>
+        <h2 style="margin-left:5px;">Unit:Standard</h2><br><br>
+        <span id="sp"style="margin-left:5px;font-size:20px;font-weight:bold;font-family:Tohoma;">Weight:</span>
+        <input type="number" class="input" id="kg"placeholder="Enter weight in kg"><br><br>
+        <span class="sp"style="margin-left:5px;font-size:20px;font-weight:bold;font-family:Tohoma;">Height:</span>
+        <span class="sp"style="margin-left:5px;font-size:20px;font-weight:bold;font-family:Tohoma;">ft:</span>
+        <input type="number" class="input" id="ft" placeholder="ft"><br><br>
+        <span class="sp"style="margin-left:70px;font-size:20px;font-weight:bold;font-family:Tohoma;">in:</span>
+        <input type="number" class="input" id="in"placeholder="in"><br>
+        <div style="display:flex;justify-content:center;align-items:center">
+            <input type="button" id="btn" onclick="calculate()"value="calculate BMI">
+        </div>
+     </form>
+    </div>
+    <div class="result">
+    <span style="color:white;font-size:20px;margin-right:25px;">BMI:</span>
+    <span id="put"style="color:white;font-size:20px;margin-right:25px;"></span>
+    <span id="status"style="color:white;font-size:20px;text-align:right;"></span>
+    </div>
+    <div style="display:flex;justify-content:space-evenly;margin-top:20px;">
+        <span class="box"style="background-color:yellow;">
+            Underweight
+            <h1><=18.4</h1>
+        </span>
+        <span class="box"style="background-color:lightgreen;">
+            Normal
+            <h1>18.5 - 24.9</h1>
+        </span>
+        <span class="box"style="background-color:red;">
+            Overweight
+           <h1>25.0 - 39.9</h1>
+        </span>
+        <span class="box"style="background-color:rgb(255,0,255);">
+            Obesitiy
+            <h1>> = 40.0</h1>
+        </span>
+    </div>
+    </div>
+    <script src="BMI.js"></script>
+</body>
+</html>

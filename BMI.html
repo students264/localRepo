@@ -4,7 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMI calculator</title>
-    <link rel="stylesheet"href="BMI.css">
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .contain{
+            height:610px;
+            width:450px;
+            border:4px solid blue;
+            padding:10px;
+            margin:10px;
+            background-color:rgb(231, 228, 228);
+        }
+        .field{
+            height:360px;
+            width:400px;
+            position:relative;
+            left:20px;
+        }
+        .input{
+            height:30px;
+            width:250px;
+            border:3px solid blue;
+            margin:10px 0px 5px 0px;
+            color:red;
+            font-weight:bold;
+            font-family:Tahoma;
+        }
+        #btn{
+            height:30px;
+            width:150px;
+            background-color:rgb(28, 28, 247);
+            border-radius:20px;
+            margin-top:10px;
+            color:white;
+        }
+        .result{
+            background-color:rgb(8, 194, 8);
+            height:40px;
+            width:400px;
+            border:3px solid black;
+            margin-top:10px;
+            position:relative;
+            left:20px;
+            color:white;
+            
+        }
+        .box{
+            height:150px;
+            width:100px;
+            border:2px solid black;
+            font-weight:bold;
+            font-size:15px;
+            text-align:center;
+        }
+        @media only screen and (max-width:600px){
+            .contain{
+                height:300px;
+                width:250px;
+                border:2px solid blue;
+            }
+        }
+            
+        
+    </style>
 </head>
 <body>
     <div class="contain">
@@ -47,6 +114,34 @@
         </span>
     </div>
     </div>
-    <script src="BMI.js"></script>
+    <script>
+        function calculate(){
+            let res=document.getElementById("put");
+            let status=document.getElementById("status");
+            let weight=Number(document.getElementById("kg").value);
+            let ft=Number(document.getElementById("ft").value);
+            let inc=Number(document.getElementById("in").value);
+            let inche=(ft*12)+inc;
+            let h=(inche*0.0254);
+            let bmi=(weight)/(h*h);
+            if(bmi<=18.4){
+              res.innerText=bmi.toPrecision(3);
+              status.innerText="Underweight";
+            }
+            else if(bmi>=18.5 && bmi<=24.9){
+                res.innerText=bmi.toPrecision(3);
+              status.innerText="Normal";
+            }
+            else if(bmi>=25.0 && bmi<=39.9){
+                res.innerText=bmi.toPrecision(3);
+              status.innerText="Overweight";
+            }
+            else{
+                res.innerText=bmi.toPrecision(3);
+              status.innerText="Obesity";
+            }
+            }
+            
+    </script>
 </body>
 </html>
